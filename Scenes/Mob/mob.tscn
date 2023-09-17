@@ -55,7 +55,7 @@ script = ExtResource("1_dj2q1")
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_8pj2x")
 animation = &"walk"
-frame_progress = 0.256619
+frame_progress = 0.148451
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7ckcg")

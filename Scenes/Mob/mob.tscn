@@ -49,13 +49,14 @@ radius = 32.0
 height = 66.0
 
 [node name="Mob" type="RigidBody2D"]
+gravity_scale = 2.66454e-15
 script = ExtResource("1_dj2q1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_8pj2x")
 animation = &"walk"
-frame_progress = 0.148451
+frame_progress = 0.244218
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7ckcg")

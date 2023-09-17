@@ -17,7 +17,6 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	get_tree().call_group("mobs", "queue_free")
-	
 
 func _on_player_hit() -> void:
 	game_over()

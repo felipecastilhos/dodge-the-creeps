@@ -20,20 +20,22 @@ func _process(delta: float) -> void:
 	_move(velocity, delta)
 
 func _animateMovement(velocity: Vector2) -> void:
-	var animatedSprite:AnimatedSprite2D = $AnimatedSprite2D
-	
-	if velocity.x != 0:
-		animatedSprite.animation = "walk"
+	var animatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+
+	if velocity.length() > 0:
+		# Calculate the rotation angle in radians based on the velocity
+		var angle = atan2(velocity.x, -velocity.y)
+
+		# Convert radians to degrees and set the rotation
+		animatedSprite.rotation_degrees = angle * 180 / PI
+
+		animatedSprite.animation = "up"
+		animatedSprite.play()
 		animatedSprite.flip_v = false
 		animatedSprite.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		animatedSprite.animation = "up"
-		animatedSprite.flip_v = velocity.y > 0
-		
-	if(velocity.length() > 0):
-		animatedSprite.play()
 	else:
-		animatedSprite.stop()
+		animatedSprite.animation = "walk"
+		animatedSprite.play()
 		
 func _move(velocity: Vector2, delta: float):
 	if(velocity.length() > 0): 

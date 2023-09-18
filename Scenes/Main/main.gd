@@ -1,6 +1,7 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var mobSpeedGrowth: float = 0.5
 var score: float = 0.0
 	
 func game_over():
@@ -30,22 +31,31 @@ func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
 	
 func _on_mob_timer_timeout() -> void:
-	var mob: Node2D  = mob_scene.instantiate()
+	spawn_mob()
 	
-	var mob_spawn_location:PathFollow2D = $MobPath/MobSpawnLocation
+func spawn_mob() -> void:
+	var mob: Node2D = mob_scene.instantiate()
+	
+	var mob_spawn_location: PathFollow2D = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
 	
 	var direction: float = mob_spawn_location.rotation + PI / 2
 	
 	mob.position = mob_spawn_location.position
 	
-	direction += randf_range(-PI / 4, PI /4 )
+	direction += randf_range(-PI / 4, PI / 4)
 	mob.rotation = direction
 	
-	var velocity: Vector2 = Vector2(randf_range(150.0, 250.0), 0.0)
+	var minVelocity = 150.0  # Minimum velocity
+	var maxVelocity = 250.0  # Maximum velocity
+	
+	var logVelocity = minVelocity + (maxVelocity - minVelocity) * (1.0 - exp(-mobSpeedGrowth * score))
+	
+	var velocity: Vector2 = Vector2(logVelocity, 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
+
 
 func _on_hud_start_game() -> void:
 	new_game()

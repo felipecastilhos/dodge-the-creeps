@@ -8,7 +8,6 @@ func show_message(text) -> void:
 	message.show()
 	$MessageTimer.start()
 	
-	
 func show_game_over():
 	show_message('Game Over')
 	await $MessageTimer.timeout

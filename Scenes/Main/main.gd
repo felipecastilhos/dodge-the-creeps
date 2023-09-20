@@ -1,7 +1,7 @@
 extends Node
 
 @export var mob_scene: PackedScene
-@export var mobSpeedGrowth: float = 0.5
+@export var mobSpeedGrowth: float = 0.2
 var score: float = 0.0
 	
 func game_over():
